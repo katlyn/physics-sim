@@ -15,6 +15,7 @@ class PhysicsObject {
   constructor (options) {
     this.mass = options.mass
     this.velocity = options.velocity
+    this.acceleration = options.acceleration
   }
 }
 
