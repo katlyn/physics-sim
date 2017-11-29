@@ -19,6 +19,14 @@ class PhysicsObject {
     this.acceleration = options.acceleration
     this.position = options.position
   }
+
+  /**
+   * Applies a force to an Object
+   * @param {Force} force - the force to apply
+   */
+  apply (force) {
+
+  }
 }
 
 module.exports = PhysicsObject

@@ -1,4 +1,8 @@
 class PhysicsSystem {
+  /**
+   * Create a new system.
+   * @param {PhysicsObject[]} objects - the objects to add to the system
+   */
   constructor (objects) {
     this.objects = objects
   }
