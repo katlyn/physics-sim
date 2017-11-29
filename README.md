@@ -3,13 +3,13 @@
 A simple physics simulator written in JS
 
 ### Goals
-[ ] Arbitrary tick process
+- [ ] Arbitrary tick process
   - ticks must be called manually
 
-[ ] Aceleration
+- [ ] Aceleration
   - be able to calculate the proper distance, speed, and velocity given an acceleration
 
-[ ] Friction
+- [ ] Friction
   - Be able to take friction into account with above
 
-[ ] All on a two dimensional plane
+- [ ] All on a two dimensional plane
