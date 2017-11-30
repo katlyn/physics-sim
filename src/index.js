@@ -4,6 +4,7 @@ const Position = require('./Position')
 const Force = require('./Force')
 const Object = require('./PhysicsObject')
 const System = require('./PhysicsSystem')
+const Constants = require('./constants')
 
 module.exports = {
   Velocity: Velocity,
@@ -11,5 +12,6 @@ module.exports = {
   Position: Position,
   Force: Force,
   Object: Object,
-  System: System
+  System: System,
+  constants: constants
 }
