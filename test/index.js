@@ -64,8 +64,6 @@ for (let stat in statsTwo) {
   context.beginPath()
   context.moveTo(prevStat[0], prevStat[1])
   context.lineTo(theStat[0], theStat[1])
-  context.lineWidth = 5
-  context.lineCap = 'round'
   context.stroke()
 
   prevStat = theStat
@@ -79,16 +77,3 @@ stream.on('data', function (chunk) {
 stream.on('end', function () {
   console.log('saved png')
 })
-
-console.log(testObject)
-console.log(stats)
-
-var file = fs.createWriteStream('objectOne.txt')
-file.on('error', function () { /* error handling */ })
-stats.forEach(function (v) { file.write(v.join(', ') + '\n') })
-file.end()
-
-var fileTwo = fs.createWriteStream('objectTwo.txt')
-fileTwo.on('error', function () { /* error handling */ })
-statsTwo.forEach(function (v) { fileTwo.write(v.join(', ') + '\n') })
-fileTwo.end()
