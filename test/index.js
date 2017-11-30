@@ -3,45 +3,36 @@ const Canvas = require('canvas')
 const fs = require('fs')
 
 let testObject = new physics.Object({
-  mass: 5,
-  velocity: new physics.Velocity(50, 50),
-  position: new physics.Position(0, 500),
-  acceleration: new physics.Acceleration(0, -9.8)
+  mass: 1,
+  velocity: new physics.Velocity(0, 0.004),
+  position: new physics.Position(200, 10),
+  acceleration: new physics.Acceleration(0, 0)
+})
+
+let testObjectTwo = new physics.Object({
+  mass: 10000,
+  velocity: new physics.Velocity(0, 0),
+  position: new physics.Position(250, 250),
+  acceleration: new physics.Acceleration(0, 0)
 })
 
 console.log(testObject)
-console.log(testObject.velocity)
-console.log(testObject.position)
-console.log(testObject.acceleration)
 
 let system = new physics.System({
-  testObject: testObject
+  testObject: testObject,
+  testObjectTwo: testObjectTwo
 })
 
-system.tick(1)
-
-console.log()
-console.log(testObject)
-console.log(testObject.velocity)
-console.log(testObject.position)
-console.log(testObject.acceleration)
-
-system.tick(-1)
-
-console.log()
-console.log(testObject)
-console.log(testObject.velocity)
-console.log(testObject.position)
-console.log(testObject.acceleration)
-
-let graph = new Canvas(3000, 1000)
+let graph = new Canvas(500, 500)
 let context = graph.getContext('2d')
 
 let stats = []
+let statsTwo = []
 
-for (let i = 0; i < 500; i++) {
-  system.tick(i / 100)
+for (let i = 0; i < 10000; i++) {
+  system.tick(i / 1000)
   stats.push([testObject.position.x, testObject.position.y])
+  statsTwo.push([testObjectTwo.position.x, testObjectTwo.position.y])
 }
 
 context.translate(0, graph.height)
@@ -64,6 +55,22 @@ for (let stat in stats) {
   prevStat = theStat
 }
 
+context.lineWidth = 8
+prevStat = statsTwo[0]
+context.strokeStyle = '#ff0000'
+for (let stat in statsTwo) {
+  let theStat = statsTwo[stat]
+
+  context.beginPath()
+  context.moveTo(prevStat[0], prevStat[1])
+  context.lineTo(theStat[0], theStat[1])
+  context.lineWidth = 5
+  context.lineCap = 'round'
+  context.stroke()
+
+  prevStat = theStat
+}
+
 let pngfile = fs.createWriteStream('./test-graph.png')
 let stream = graph.pngStream()
 stream.on('data', function (chunk) {
@@ -72,3 +79,16 @@ stream.on('data', function (chunk) {
 stream.on('end', function () {
   console.log('saved png')
 })
+
+console.log(testObject)
+console.log(stats)
+
+var file = fs.createWriteStream('objectOne.txt')
+file.on('error', function () { /* error handling */ })
+stats.forEach(function (v) { file.write(v.join(', ') + '\n') })
+file.end()
+
+var fileTwo = fs.createWriteStream('objectTwo.txt')
+fileTwo.on('error', function () { /* error handling */ })
+statsTwo.forEach(function (v) { fileTwo.write(v.join(', ') + '\n') })
+fileTwo.end()
