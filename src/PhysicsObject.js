@@ -24,8 +24,9 @@ class PhysicsObject {
    * Applies a force to an Object
    * @param {Force} force - the force to apply
    */
-  apply (force) {
-
+  applyForce (force) {
+    this.acceleration.x = this.acceleration.x - force.x / this.mass
+    this.acceleration.y = this.acceleration.y - force.y / this.mass
   }
 }
 
