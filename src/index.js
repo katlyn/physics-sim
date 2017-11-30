@@ -13,5 +13,5 @@ module.exports = {
   Force: Force,
   Object: Object,
   System: System,
-  constants: constants
+  constants: Constants
 }
