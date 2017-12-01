@@ -1,3 +1,5 @@
+const Force = require('./Force')
+
 /** Class representing an object */
 class PhysicsObject {
   /**
@@ -18,6 +20,7 @@ class PhysicsObject {
     this.velocity = options.velocity
     this.acceleration = options.acceleration
     this.position = options.position
+    this.gravitationalAcceleration = new Force(0, 0)
   }
 
   /**
@@ -25,8 +28,10 @@ class PhysicsObject {
    * @param {Force} force - the force to apply
    */
   applyForce (force) {
-    this.acceleration.x = this.acceleration.x - force.x / this.mass
-    this.acceleration.y = this.acceleration.y - force.y / this.mass
+    console.log(force)
+    let gravitationalAccelerationX = force.x / this.mass
+    let gravitationalAccelerationY = force.y / this.mass
+    this.gravitationalAcceleration = new Force(gravitationalAccelerationX, gravitationalAccelerationY)
   }
 }
 

@@ -35,14 +35,14 @@ class PhysicsSystem {
 
         object.applyForce(new Force(xForce, yForce))
       }
-      
+
+      // Calulate velocities
+      object.velocity.x = object.velocity.x + (object.acceleration.x - object.gravitationalAcceleration.x) * time
+      object.velocity.y = object.velocity.y + (object.acceleration.y - object.gravitationalAcceleration.y) * time
+
       // Calculate positions
       object.position.x = object.position.x + (object.velocity.x * time) + (0.5 * object.acceleration.x * Math.pow(time, 2))
       object.position.y = object.position.y + (object.velocity.y * time) + (0.5 * object.acceleration.y * Math.pow(time, 2))
-
-      // Calulate velocities
-      object.velocity.x = object.velocity.x + object.acceleration.x * time
-      object.velocity.y = object.velocity.y + object.acceleration.y * time
     }
   }
 }
